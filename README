@@ -1,8 +1,35 @@
-ARAutoConnect has two components : a script that can be put on Parrot's AR.Drone to allow automatic connection to WiFi Access Points
-and a java installer to perform all the tedious work of putting the script on the drone. Both these components are provided as-is 
-without any kind of warranty. See the DISCLAIMER file to be fully aware of what you are exposing yourself and your AR.Drone to if 
-you decide to use this software.
 
+# Setting up a drone for environment (https://github.com/rfolk/DroneFleet):
+
+Assumption is drones are brand-new:
+3. cd src/data/ (Keep this directory open during the rest of these instructions)
+4. Open install.sh (Change to the following)
+
+  a. ESSID=saasdrones  
+  b. IP=192.168.1.2  
+  c. NETMASK=255.255.255.0   
+
+5. Save install.sh
+6. Turn on Drone
+7. Connect to Drone Access Point with a wireless-capable computer.
+
+```
+> denotes a command in a terminal or telnet capable program. 
+> telnet 192.168.1.1    (No password required)
+> vi install.sh
+Copy and paste the install.sh on our local machine to vi
+> vi ARAutoConnect.sh
+Copy and paste the ARAutoConnect.sh on our local machine to vi
+> vi uninstall.sh
+Copy and paste the uninstall.sh
+> chmod 0755 install.sh
+> chmod 0755 ARAut	oConnect.sh
+> chmod 0755 uninstall.sh
+> ./install.sh
+> vi /data/config.ini
+Set “wifi_mode = 1”
+> reboot (Disconnection should occur and will then join ESSID once finished)
+```
 
 *** Part I : ARAutoConnect.sh ***
 
@@ -43,13 +70,3 @@ In order to be launched once the AR.Drone's WiFi network is properly configured,
 
 To uninstall the script, just delete /home/default/ARAutoConnect and remove the last line of /bin/wifi_setup.sh
 
-
-***  Part II : ARAutoConnect.jar  ***
-
-The Java Installer provided with ARAutoConnect connects to the drone via telnet. To install the script, it follows this procedure:
-    - it creates the directory /data/video/ARAutoConnect
-    - it connects via ftp to transfer ARAutoConnect.sh along with an install and an unsinstall scripts and check their md5 cheksum
-    - it launches install.sh which moves the directory ARAutoConnect to /home/default/ and modify /bin/wifi_setup.sh
-
-to uninstall, it just lauches uninstall.sh via telnet which replace wifi_setup.sh by a backup and delete the directory 
-/home/default/ARAutoConnect thus leaving no trace behind.
