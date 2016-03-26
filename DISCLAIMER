@@ -1,0 +1,4 @@
+Modifying the AR.Drone's on-board system is NOT supported by Parrot, it may affect users' security and potentially damage the drone.
+Any firmware modification (such as the one provided by ARAutoConnect) of the AR.Drone will immediatly make Parrot's warranty void. 
+If you choose to use this software,you understand that you do so AT YOUR OWN RISKS and that absolutely no warranty comes with this
+software.
